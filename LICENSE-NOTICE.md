@@ -1,0 +1,1 @@
+Portfolio source files may be adapted by the portfolio owner. Images and personal claims remain subject to their original owners' rights and approval. No right to republish private messages or third-party screenshots is implied.
