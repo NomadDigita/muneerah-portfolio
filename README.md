@@ -34,3 +34,13 @@ Work history is presented as independent affiliate and community projects. Image
 ## Deploy
 
 Vercel project name: `muneerah-cv`. GitHub repository: `NomadDigita/muneerah-portfolio`. No environment variables are required for the static website.
+
+## Production routing (verified)
+
+- **Git-connected production (source of truth):** https://muneerah-portfolio-git.vercel.app
+- **Previous portfolio link:** https://muneerah-cv.vercel.app redirects/forwards visitors to the Git deployment; it is not the project to edit.
+- **GitHub branch:** `main`; Vercel Git integration should build and deploy when commits arrive.
+- **Portfolio contacts:** `contact@muneerah.page`, `+234 704 900 1254`, Telegram `@DNeerah`, X `@Dneerah_`.
+- **Evidence Studio:** `/evidence/studio/` prepares material locally; publishing remains a reviewed GitHub commit, not a public browser upload endpoint.
+
+The first proof-to-site migration was reviewed for sensitive account details; only curated screenshots are published. The figures shown are portfolio evidence, not an independent audit.
