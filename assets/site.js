@@ -23,6 +23,51 @@
   if('IntersectionObserver' in window){const ob=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ob.unobserve(e.target)}})},{rootMargin:'0px 0px -35px 0px'});document.querySelectorAll('.reveal').forEach(x=>ob.observe(x));} else document.querySelectorAll('.reveal').forEach(x=>x.classList.add('visible'));
   const filters=document.querySelectorAll('[data-filter]');
   filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));const val=btn.dataset.filter;document.querySelectorAll('[data-evidence-category]').forEach(card=>card.hidden=!(val==='all'||card.dataset.evidenceCategory.split(' ').includes(val)));const shown=[...document.querySelectorAll('[data-evidence-category]')].filter(c=>!c.hidden).length;const note=document.querySelector('[data-filter-status]');if(note)note.textContent=`Showing ${shown} ${shown===1?'piece':'pieces'} of evidence`;}));
+  // Accessible experience card deck. The page remains a readable list without JavaScript.
+  const deck=document.querySelector('[data-experience-deck]');
+  if(deck){
+    const slides=[...deck.querySelectorAll('[data-experience-slide]')];
+    const tabs=[...deck.querySelectorAll('[data-experience-tab]')];
+    const next=deck.querySelector('[data-experience-next]');
+    const prev=deck.querySelector('[data-experience-prev]');
+    const counter=deck.querySelector('[data-experience-index]');
+    let index=0,startX=null,startY=null;
+    const setExperience=(value,focusTab=false)=>{
+      index=(value+slides.length)%slides.length;
+      slides.forEach((slide,i)=>{
+        slide.hidden=i!==index;
+        slide.classList.toggle('is-current',i===index);
+        slide.setAttribute('aria-hidden',String(i!==index));
+      });
+      tabs.forEach((tab,i)=>{
+        tab.setAttribute('aria-selected',String(i===index));
+        tab.tabIndex=i===index?0:-1;
+      });
+      if(counter)counter.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+      if(focusTab)tabs[index]?.focus();
+    };
+    if(slides.length&&tabs.length===slides.length){
+      deck.classList.add('is-enhanced');setExperience(0);
+      next?.addEventListener('click',()=>setExperience(index+1));
+      prev?.addEventListener('click',()=>setExperience(index-1));
+      tabs.forEach((tab,i)=>{
+        tab.addEventListener('click',()=>setExperience(i));
+        tab.addEventListener('keydown',e=>{
+          if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){
+            e.preventDefault();
+            setExperience(e.key==='Home'?0:e.key==='End'?slides.length-1:index+(e.key==='ArrowRight'?1:-1),true);
+          }
+        });
+      });
+      deck.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;startX=e.touches[0].clientX;startY=e.touches[0].clientY;},{passive:true});
+      deck.addEventListener('touchend',e=>{
+        if(startX===null||!e.changedTouches.length)return;
+        const dx=e.changedTouches[0].clientX-startX,dy=e.changedTouches[0].clientY-startY;
+        if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.3)setExperience(index+(dx<0?1:-1));
+        startX=null;startY=null;
+      },{passive:true});
+    }
+  }
   const modal=document.querySelector('#proof-lightbox');
   document.querySelectorAll('[data-lightbox-image]').forEach(link=>link.addEventListener('click',e=>{if(!modal?.showModal)return;e.preventDefault();const img=modal.querySelector('img');img.src=link.href;img.alt=link.dataset.label||'Portfolio evidence';modal.showModal()}));
   modal?.querySelector('[data-close]')?.addEventListener('click',()=>modal.close());
