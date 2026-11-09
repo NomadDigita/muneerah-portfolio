@@ -27,3 +27,14 @@ The résumé's experience represents independent digital marketing and community
 ## Accessibility and design
 
 No frontend build dependency is required. The site uses semantic HTML, a skip link, focus-visible outlines, reduced-motion fallbacks, responsive grids, native theme controls, and graceful backdrops where supported. Typography and layout favor clarity over decorative effects.
+
+## Experience timeline (confirmed 9 November 2026)
+
+Muneerah began digital marketing on 3 December 2023. Independent digital product and affiliate marketing platform history:
+
+- Digitstem — January 2024 to November 2024
+- ZenithStake — December 2024 to May 2025
+- Selar — January 2025 to June 2025
+- LearnerFlex — June 2025 to May 2026
+
+These are platform experience periods, **not asserted company employment contracts**. Overlapping date ranges are intentional. The interactive Experience page features accessible arrow/tab and swipe navigation and displays every card when JavaScript is unavailable. To edit the experience, update the `platforms` data in `build_site.py` and the PDF role descriptions in `make_resume.py`, then regenerate both.
