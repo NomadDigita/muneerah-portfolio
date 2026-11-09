@@ -243,3 +243,6 @@ html{scroll-behavior:smooth}
 @media(max-width:370px){.experience-slide{border-radius:20px}.experience-visual h3{font-size:46px}.experience-tab small{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.experience-deck.is-enhanced .experience-slide.is-current{animation:none}.experience-deck-btn,.experience-detail-link{transition:none}}
 @media print{.experience-deck.is-enhanced .experience-slide{display:grid!important;break-inside:avoid}.experience-deck-tools,.experience-tabs,.experience-deck::before,.experience-deck::after{display:none!important}}
+
+/* Keep the experience cards below the sticky header when navigated to directly. */
+.experience-deck{scroll-margin-top:112px}
