@@ -33,7 +33,7 @@ Work history is presented as independent affiliate and community projects. Image
 
 ## Deploy
 
-Vercel project name: `muneerah-cv`. GitHub repository: `NomadDigita/muneerah-portfolio`. No environment variables are required for the static website.
+Vercel Git-connected project: `muneerah-portfolio-git`. The legacy `muneerah-cv` project forwards traffic to it. GitHub repository: `NomadDigita/muneerah-portfolio`. No environment variables are required for the static website.
 
 ## Production routing (verified)
 
