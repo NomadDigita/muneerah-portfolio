@@ -6,12 +6,18 @@
   function updateTheme(){if(theme){theme.setAttribute('aria-label',`Switch to ${doc.dataset.theme==='light'?'dark':'light'} mode`);theme.textContent=doc.dataset.theme==='light'?'☾':'☀';}}
   updateTheme();
   theme?.addEventListener('click',()=>{doc.dataset.theme=doc.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('muneerah-theme',doc.dataset.theme)}catch(e){}updateTheme()});
+  // Sticky liquid-glass surface deepens gently as content scrolls behind it.
+  const header=document.querySelector('.site-header');
+  let scrollPending=false;
+  const updateHeader=()=>{scrollPending=false;header?.classList.toggle('is-scrolled',window.scrollY>28)};
+  updateHeader();
+  window.addEventListener('scroll',()=>{if(!scrollPending){scrollPending=true;requestAnimationFrame(updateHeader)}},{passive:true});
   const menu=document.querySelector('[data-menu-toggle]');const nav=document.querySelector('[data-nav-links]');
   menu?.addEventListener('click',()=>{let open=nav.classList.toggle('is-open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'✕':'☰'});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav?.classList.contains('is-open')){nav.classList.remove('is-open');menu?.setAttribute('aria-expanded','false');menu.textContent='☰'}});
   if('IntersectionObserver' in window){const ob=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ob.unobserve(e.target)}})},{rootMargin:'0px 0px -35px 0px'});document.querySelectorAll('.reveal').forEach(x=>ob.observe(x));} else document.querySelectorAll('.reveal').forEach(x=>x.classList.add('visible'));
   const filters=document.querySelectorAll('[data-filter]');
-  filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));const val=btn.dataset.filter;document.querySelectorAll('[data-evidence-category]').forEach(card=>card.hidden=!(val==='all'||card.dataset.evidenceCategory.split(' ').includes(val)));}));
+  filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));const val=btn.dataset.filter;document.querySelectorAll('[data-evidence-category]').forEach(card=>card.hidden=!(val==='all'||card.dataset.evidenceCategory.split(' ').includes(val)));const shown=[...document.querySelectorAll('[data-evidence-category]')].filter(c=>!c.hidden).length;const note=document.querySelector('[data-filter-status]');if(note)note.textContent=`Showing ${shown} ${shown===1?'piece':'pieces'} of evidence`;}));
   const modal=document.querySelector('#proof-lightbox');
   document.querySelectorAll('[data-lightbox-image]').forEach(link=>link.addEventListener('click',e=>{if(!modal?.showModal)return;e.preventDefault();const img=modal.querySelector('img');img.src=link.href;img.alt=link.dataset.label||'Portfolio evidence';modal.showModal()}));
   modal?.querySelector('[data-close]')?.addEventListener('click',()=>modal.close());
