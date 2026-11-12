@@ -75,11 +75,11 @@ def render(d):
  y-=23
  t(L,y,d['role'],10.9,'LatoBold',GREEN)
  y-=22
- t(L,y,'Nigeria  |  +234 704 900 1254  |  contact@muneerah.page',9.4,'Lato',MUTED)
+ t(L,y,'Nigeria  |  +234 704 900 1254  |  contact@muneerah.top',9.4,'Lato',MUTED)
  y-=16
  t(L,y,'muneerah-portfolio-git.vercel.app  |  X: @Dneerah_  |  Telegram: @DNeerah',9.05,'Lato',MUTED)
  c.linkURL('https://muneerah-portfolio-git.vercel.app',(L,y-3,L+235,y+11),relative=0)
- c.linkURL('mailto:contact@muneerah.page',(L+194,y+16,L+335,y+31),relative=0)
+ c.linkURL('mailto:contact@muneerah.top',(L+194,y+16,L+335,y+31),relative=0)
  y=heading('Professional summary',y)
  y=wrap(d['summary'],L,y,size=10.15,leading=15.2,color=INK)-6
  y=heading('Platform experience',y)
