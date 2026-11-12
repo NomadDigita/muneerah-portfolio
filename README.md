@@ -3,7 +3,7 @@
 A professional portfolio for Muneerah Muhammad Thalith, focused on digital marketing, community management, and customer experience.
 
 **Live site:** https://muneerah-portfolio-git.vercel.app  
-**Contact:** contact@muneerah.page  
+**Contact:** contact@muneerah.top  
 **X:** https://x.com/Dneerah_ · **Telegram:** https://t.me/DNeerah
 
 ## Site
